@@ -13,6 +13,8 @@ class Article extends Model
     protected $fillable = ['title', 'body', 'img', 'slug'];
     protected $guarded = [];
 
+    public $dates = ['published_at'];
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -35,7 +37,8 @@ class Article extends Model
 
     public function createdAtForHumans()
     {
-        return $this->created_at->diffForHumans();
+        //return $this->created_at->diffForHumans();
+        return $this->published_at->diffForHumans();
     }
 
     public function scopeLastLimit($query, $numbers)
@@ -43,6 +46,18 @@ class Article extends Model
         return $query->with('tags', 'state')->orderBy('created_at', 'DESC')->limit($numbers)->get();
     }
 
+    public function scopeAllPaginate($query, $numbers)
+    {
+        return $query->with('tags', 'state')->orderBy('created_at', 'DESC')->paginate($numbers);
+    }
 
+    public function scopeFindBySlug($query, $slug)
+    {
+        return $query->with('comments', 'tags', 'state')->where('slug', $slug)->firstOrFail();
+    }
 
+    public function scopeFindByTag($query)
+    {
+        return $query->with('tags', 'state')->orderBy('created_at', 'DESC')->paginate(10);
+    }
 }

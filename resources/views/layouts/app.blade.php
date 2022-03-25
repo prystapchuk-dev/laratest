@@ -27,10 +27,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active menu-link menu-link__active" aria-current="page" href="#">Головна сторіна</a>
+                                <a href="{{ route('home') }}" class="nav-link menu-link {{ $mainLink }}" aria-current="page">Головна сторіна</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#">Каталог статей</a>
+                                <a href="{{ route('article.index') }}" class="nav-link menu-link {{ $articleLink }}">Каталог статей</a>
                             </li>
                         </ul>
                         <a class="d-flex justify-content-end" target="_blank" href="https://github.com/prystapchuk-dev/laratest">
@@ -39,10 +39,9 @@
                     </div>
                 </div>
             </nav>
-
             @yield('hero')
             @yield('content')
             @yield('vue')
-        </div>>
+        </div>
     </body>
 </html>

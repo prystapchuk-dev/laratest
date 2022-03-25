@@ -7,7 +7,7 @@
 @section('content')
     <div class="row mt-5">
         @foreach($articles as $article)
-            <div class="col-6 pb-3">
+            <div class="col-4 pb-3">
                 <div class="card">
                     <img src="{{$article->img}}" class="card-img-top" alt="">
                     <div class="card-body">
@@ -23,7 +23,7 @@
                         <div class="mt-4">
                             Теги:
                             @foreach($article->tags as $tag)
-                                <a href="{{route('article.tag', $tag->id)}}" class="badge bg-danger">{{$tag->label}}</a>
+                                a href="{{route('article.tag', $tag->id)}}" class="badge bg-danger">{{$tag->label}}</a>
                             @endforeach
                         </div>
                     </div>
@@ -31,4 +31,5 @@
             </div>
         @endforeach
     </div>
+    <div class="mx-auto" style="width: max-content;">{{$articles->links()}}</div>
 @endsection
